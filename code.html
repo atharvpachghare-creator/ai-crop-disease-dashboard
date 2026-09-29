@@ -1,0 +1,339 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Disease Detection - AgroScan AI</title>
+<!-- Font Imports -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#9cf49c",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#bdefbe",
+                        "surface-container-low": "#f5f3f3",
+                        "on-background": "#1b1c1c",
+                        "surface-dim": "#dbdad9",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#24502c",
+                        "tertiary-container": "#4b7850",
+                        "surface-bright": "#fbf9f9",
+                        "secondary-fixed": "#9ff79f",
+                        "surface": "#fbf9f9",
+                        "outline-variant": "#bfcaba",
+                        "background": "#fbf9f9",
+                        "surface-variant": "#e3e2e2",
+                        "outline": "#707a6c",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#1b6d24",
+                        "tertiary-fixed-dim": "#a2d3a4",
+                        "on-tertiary-container": "#ccfecd",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#40493d",
+                        "secondary": "#126d27",
+                        "tertiary": "#335f3a",
+                        "primary-fixed": "#a3f69c",
+                        "primary": "#0d631b",
+                        "on-tertiary-fixed": "#002109",
+                        "on-secondary-container": "#19722b",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#303031",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#88d982",
+                        "primary-fixed-dim": "#88d982",
+                        "surface-container-highest": "#e3e2e2",
+                        "on-primary-container": "#cbffc2",
+                        "on-primary-fixed-variant": "#005312",
+                        "surface-container-high": "#e9e8e7",
+                        "primary-container": "#2e7d32",
+                        "on-secondary-fixed": "#002105",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#efeded",
+                        "on-secondary-fixed-variant": "#005318",
+                        "on-surface": "#1b1c1c",
+                        "on-primary-fixed": "#002204",
+                        "secondary-fixed-dim": "#83da85"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "card": "24px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "sm": "12px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xs": "8px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "20px",
+                        "xl": "32px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+        }
+        .upload-dashed {
+            background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='24' ry='24' stroke='%23707A6CFF' stroke-width='2' stroke-dasharray='12%2c 12' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+        }
+        .organic-gradient {
+            background: radial-gradient(circle at top right, rgba(163, 246, 156, 0.15), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(27, 109, 36, 0.05), transparent 40%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen overflow-x-hidden organic-gradient" style="background-position: 44.7344% 59.8123%;">
+<!-- Desktop Side Navigation -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest shadow-sm z-50 p-md gap-xs">
+<div class="flex items-center gap-sm px-xs mb-xl">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">psychology</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed leading-tight">AgroScan AI</h1>
+<p class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Scientific Vitality</p>
+</div>
+</div>
+<nav class="flex flex-col gap-xs flex-grow">
+<a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-300 scale-95 active:opacity-80" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md p-md bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-300" href="#">
+<span class="material-symbols-outlined">center_focus_strong</span>
+<span class="font-label-md text-label-md">AI Scan</span>
+</a>
+<a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-300 scale-95 active:opacity-80" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-md text-label-md">Disease Library</span>
+</a>
+<a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-300 scale-95 active:opacity-80" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Scan History</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-xs border-t border-outline-variant pt-md">
+<a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-300" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-md p-md text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all duration-300" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="md:ml-64 min-h-screen flex flex-col">
+<!-- Top Navbar -->
+<header class="sticky top-0 z-40 glass-header flex justify-between items-center w-full px-margin-desktop h-16 border-b border-outline-variant shadow-sm">
+<div class="md:hidden flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">menu</span>
+<span class="font-display-lg text-headline-md text-primary">AgroScan AI</span>
+</div>
+<div class="hidden md:block">
+<span class="font-label-md text-label-md text-on-surface-variant">Diagnostics &gt; <span class="text-primary">AI Scan</span></span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-md"><div class="relative group">
+  <button class="flex items-center gap-xs px-sm py-1 rounded-full border border-outline-variant hover:bg-surface-container-low transition-colors duration-200">
+    <span class="material-symbols-outlined text-primary text-sm">language</span>
+    <span class="font-label-md text-label-sm text-on-surface-variant">English</span>
+    <span class="material-symbols-outlined text-on-surface-variant text-sm">expand_more</span>
+  </button>
+  <div class="absolute right-0 mt-xs w-32 bg-surface border border-outline-variant rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+    <div class="py-1">
+      <a href="#" class="block px-md py-xs font-label-md text-label-sm text-primary bg-secondary-container/20 hover:bg-secondary-container/40">English</a>
+      <a href="#" class="block px-md py-xs font-label-md text-label-sm text-on-surface-variant hover:bg-surface-container-low">हिन्दी</a>
+      <a href="#" class="block px-md py-xs font-label-md text-label-sm text-on-surface-variant hover:bg-surface-container-low">मराठी</a>
+    </div>
+  </div>
+</div>
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80 transition-colors duration-200">notifications</span>
+<span class="material-symbols-outlined text-primary cursor-pointer active:opacity-80 transition-colors duration-200">help</span>
+</div>
+<div class="h-10 w-10 rounded-full bg-surface-variant overflow-hidden border border-outline-variant cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a modern agronomist wearing a branded lab coat, looking confidently at the camera against a soft-focus laboratory background with plants. The lighting is clean and bright, matching a premium corporate aesthetic with soft green accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC859wFujh7IrW5M3bd_Q4zZ-Ob4zS0_MSkJyp3zZgZmyThgi4hi2T2R6qmyXpX7LIQjA6Es2mA7gYkBIEqmpnHLNxMOGeOG6tMuDeAj6b8VAXeiSCFgHo5qzHHRSIcLSfr-FlyzZ21JqEJZLYXOP23wPWk6zWLu_mGqfBQ0JWeIPFEsDbXZC6xJrZtV83AC91W_K4j3YoFrVej5SmMzdkiOluxom00mrk8R38zlB6UsqjRT9HWow4">
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<section class="flex-grow px-margin-mobile md:px-margin-desktop py-xl flex flex-col items-center justify-center">
+<!-- Hero Content -->
+<div class="text-center max-w-2xl mb-xl">
+<span class="inline-block px-md py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-md text-label-sm mb-md uppercase tracking-widest">Disease Detection</span>
+<h2 class="font-display-lg text-display-lg text-on-surface mb-md">Upload a leaf image</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Select your crop type below for specialized AI analysis. Our models are fine-tuned for maximum precision in Cotton and Soybean health diagnostics.</p>
+</div>
+<!-- Drag & Drop Zone -->
+<div class="w-full max-w-4xl">
+<div class="bg-surface rounded-card upload-dashed p-xl md:p-32 flex flex-col items-center justify-center text-center transition-all duration-500 hover:bg-surface-container-low cursor-pointer group relative overflow-hidden">
+<!-- Background Shader Effect (Atmospheric) -->
+<div class="absolute inset-0 opacity-10 pointer-events-none group-hover:opacity-20 transition-opacity">
+
+</div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-24 h-24 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center mb-xl shadow-lg transition-transform duration-300 group-hover:scale-110">
+<span class="material-symbols-outlined text-[48px]" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Drop your leaf image here</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">or choose from the options below</p>
+<div class="flex flex-col sm:flex-row gap-md">
+<button class="flex items-center justify-center gap-md px-xl py-md bg-inverse-surface text-inverse-on-surface rounded-full font-label-md text-label-md hover:opacity-90 transition-all shadow-md active:scale-95">
+<span class="material-symbols-outlined">grid_view</span>
+                                Gallery
+                            </button>
+<button class="flex items-center justify-center gap-md px-xl py-md bg-surface border border-primary text-primary rounded-full font-label-md text-label-md hover:bg-primary-fixed-dim transition-all shadow-sm active:scale-95">
+<span class="material-symbols-outlined">photo_camera</span>
+                                Camera
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Crop Selection / Indicators -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mt-xl w-full max-w-4xl">
+  <button class="group relative bg-white p-lg rounded-card shadow-[0px_8px_24px_rgba(46,125,50,0.08)] flex flex-col items-center gap-md border-2 border-transparent hover:border-primary transition-all duration-300 text-center">
+    <div class="w-full h-40 rounded-xl bg-surface-container overflow-hidden mb-sm">
+      <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLsmkAvnuhcIELr5dHoj6NPW_dAy0bRLwH7Xghq0fIbmWZNNcrqbJvtX1w-vnVRGyk0BLBRELWMUMP7qYif19eSlPBBqFoxJYIR94SCg15tIPh09US_AcGceV32E-7Nb__FQBLNJNRPAXtQxjfockeiAG_nIHje5WcS9hBPAu3kUQOOX813Rgdj84zP_FlFJlXfDmVFUv4TZTcNqSSfLU4yKUWyHVfBzPm0ukZu2SxHhdF8BLcS_rUOeRA" alt="Cotton Leaf">
+    </div>
+    <div>
+      <h4 class="font-headline-md text-headline-md text-on-surface">Cotton</h4>
+      <p class="text-on-surface-variant text-label-md">Optimized for Gossypium detection</p>
+    </div>
+    <div class="mt-md px-xl py-md bg-primary text-on-primary rounded-full font-label-md opacity-0 group-hover:opacity-100 transition-opacity">
+      Select Cotton
+    </div>
+  </button>
+  <button class="group relative bg-white p-lg rounded-card shadow-[0px_8px_24px_rgba(46,125,50,0.08)] flex flex-col items-center gap-md border-2 border-transparent hover:border-primary transition-all duration-300 text-center">
+    <div class="w-full h-40 rounded-xl bg-surface-container overflow-hidden mb-sm">
+      <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/AP1WRLtbyRYfr8W6teq02B4OdcyV6LPHBQXXjCgnmEHySa_LLNXFABCF6uqynDCRFscOH0xkuQKpLgtuYBBme_udivcEWasJ8fz07Hhu-XrUU9UqQwipWoJ9Lakyco34mBZYShbIuEPVXLxIY8QJyaAiCIs60_oDik_J81LxID5MbmHNvh_8tWVFTiJzuotC2c22nQ3fCjBLfvbDSO-_IVpVBVbkuApbRdxkgYIQiy-nDz9eFQJMLmVGW80GWw" alt="Soybean Leaf">
+    </div>
+    <div>
+      <h4 class="font-headline-md text-headline-md text-on-surface">Soybean</h4>
+      <p class="text-on-surface-variant text-label-md">Optimized for Glycine max detection</p>
+    </div>
+    <div class="mt-md px-xl py-md bg-primary text-on-primary rounded-full font-label-md opacity-0 group-hover:opacity-100 transition-opacity">
+      Select Soybean
+    </div>
+  </button>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container px-margin-desktop py-xl mt-auto">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-xl">
+<div class="col-span-1">
+<div class="flex items-center gap-xs mb-md">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-sm">psychology</span>
+</div>
+<span class="font-headline-md text-primary">AgroScan AI</span>
+</div>
+<p class="text-on-surface-variant font-body-md">AI-powered leaf disease detection for cotton and soybean farmers. Delivering scientific precision to every field.</p>
+</div>
+<div>
+<h5 class="font-label-md text-label-md text-on-surface mb-md">Project</h5>
+<ul class="space-y-xs text-on-surface-variant font-body-md">
+<li class="">AgriVision AI</li>
+<li class="">Cotton &amp; Soybean Detection</li>
+<li class="">v1.0.0</li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-md text-label-md text-on-surface mb-md">Developer</h5>
+<ul class="space-y-xs text-on-surface-variant font-body-md">
+<li class="">Atharv Pachghare</li>
+<li class="">G.H. Raisoni College of Engineering</li>
+<li class="">Nagpur</li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-md text-label-md text-on-surface mb-md">Connect</h5>
+<div class="flex gap-md">
+<a class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined">terminal</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center hover:bg-secondary-container transition-colors" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-outline-variant mt-xl pt-md text-center">
+<p class="text-label-sm text-on-surface-variant">© 2026 AgroScan AI. Built for farmers, by students.</p>
+</div>
+</footer>
+</main>
+<!-- FAB for quick scan (Mobile Only) -->
+<div class="md:hidden fixed bottom-8 right-8 z-50">
+<button class="w-16 h-16 rounded-full bg-primary text-on-primary shadow-xl flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">camera</span>
+</button>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+        // Simple drag and drop hover visual effects
+        const dropZone = document.querySelector('.upload-dashed');
+        
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('bg-secondary-container/20');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('bg-secondary-container/20');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('bg-secondary-container/20');
+            // Mock file handling
+            alert('Image received! AI analyzing patterns...');
+        });
+
+        // Add a subtle parallax effect to the background on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX / window.innerWidth - 0.5) * 20;
+            const moveY = (e.clientY / window.innerHeight - 0.5) * 20;
+            document.body.style.backgroundPosition = `${50 + moveX}% ${50 + moveY}%`;
+        });
+    </script>
+
+
+</body></html>
